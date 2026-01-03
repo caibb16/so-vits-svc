@@ -2,6 +2,11 @@ import logging
 import multiprocessing
 import os
 import time
+import warnings
+
+# 过滤 torch.load 的 FutureWarning
+warnings.filterwarnings('ignore', category=FutureWarning, message='.*torch.load.*weights_only.*')
+
 
 import torch
 import torch.distributed as dist

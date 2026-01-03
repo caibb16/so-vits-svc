@@ -165,3 +165,6 @@ pretrain/
 .vscode/launch.json
 
 trained/**/
+*.wav
+filelists/
+download_hf_file.py
