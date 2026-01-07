@@ -14,7 +14,7 @@ data:
   validation_files: filelists/val.txt
 device: cuda
 env:
-  expdir: logs/44k/diffusion
+  expdir: logs/Rei_statement/diffusion
   gpu_id: 0
 infer:
   method: dpm-solver++
@@ -29,7 +29,7 @@ model:
   type: Diffusion
   use_pitch_aug: true
 spk:
-  rei_slicer: 0
+  Rei_state_slice: 0
 train:
   amp_dtype: fp32
   batch_size: 48
@@ -41,7 +41,7 @@ train:
   gamma: 0.5
   interval_force_save: 5000
   interval_log: 10
-  interval_val: 2000
+  interval_val: 5000
   lr: 0.0001
   num_workers: 4
   save_opt: false

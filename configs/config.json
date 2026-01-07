@@ -1,9 +1,9 @@
 {
   "train": {
-    "log_interval": 200,
+    "log_interval": 50,
     "eval_interval": 1000,
     "seed": 1234,
-    "epochs": 6000,
+    "epochs": 10000,
     "learning_rate": 0.0002,
     "betas": [
       0.8,
@@ -22,7 +22,7 @@
     "use_sr": true,
     "max_speclen": 512,
     "port": "8001",
-    "keep_ckpts": 5,
+    "keep_ckpts": 10,
     "all_in_mem": true,
     "vol_aug": false
   },
@@ -102,6 +102,6 @@
     "use_transformer_flow": false
   },
   "spk": {
-    "rei_slicer": 0
+    "Rei_state_slice": 0
   }
 }

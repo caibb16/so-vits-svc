@@ -9,7 +9,8 @@ from spkmix import spk_mix_map
 logging.getLogger('numba').setLevel(logging.WARNING)
 chunks_dict = infer_tool.read_temp("inference/chunks_temp.json")
 
-
+# 推理命令
+# python inference_main.py -m logs/Rei_statement/G_35000.pth -c logs/Rei_statement/config.json -n "onelastkiss.wav" -t 0 -s Rei_state_slice -f0p rmvpe -shd -dm logs/Rei_statement/diffusion/model_175000.pt -dc logs/Rei_statement/diffusion/config.yaml
 
 def main():
     import argparse
@@ -17,7 +18,7 @@ def main():
     parser = argparse.ArgumentParser(description='sovits4 inference')
 
     # 一定要设置的部分
-    parser.add_argument('-m', '--model_path', type=str, default="logs/44k/G_16000.pth", help='模型路径')
+    parser.add_argument('-m', '--model_path', type=str, default="logs/44k/G_25000.pth", help='模型路径')
     parser.add_argument('-c', '--config_path', type=str, default="logs/44k/config.json", help='配置文件路径')
     parser.add_argument('-cl', '--clip', type=float, default=0, help='音频强制切片，默认0为自动切片，单位为秒/s')
     parser.add_argument('-n', '--clean_names', type=str, nargs='+', default=["反方向的钟.wav"], help='wav文件名列表，放在raw文件夹下')
@@ -31,7 +32,7 @@ def main():
     parser.add_argument('-lg', '--linear_gradient', type=float, default=0, help='两段音频切片的交叉淡入长度，如果强制切片后出现人声不连贯可调整该数值，如果连贯建议采用默认值0，单位为秒')
     parser.add_argument('-f0p', '--f0_predictor', type=str, default="pm", help='选择F0预测器,可选择crepe,pm,dio,harvest,rmvpe,fcpe默认为pm(注意：crepe为原F0使用均值滤波器)')
     parser.add_argument('-eh', '--enhance', action='store_true', default=False, help='是否使用NSF_HIFIGAN增强器,该选项对部分训练集少的模型有一定的音质增强效果，但是对训练好的模型有反面效果，默认关闭')
-    parser.add_argument('-shd', '--shallow_diffusion', action='store_true', default=False, help='是否使用浅层扩散，使用后可解决一部分电音问题，默认关闭，该选项打开时，NSF_HIFIGAN增强器将会被禁止')
+    parser.add_argument('-shd', '--shallow_diffusion', action='store_true', default=True, help='是否使用浅层扩散，使用后可解决一部分电音问题，默认关闭，该选项打开时，NSF_HIFIGAN增强器将会被禁止')
     parser.add_argument('-usm', '--use_spk_mix', action='store_true', default=False, help='是否使用角色融合')
     parser.add_argument('-lea', '--loudness_envelope_adjustment', type=float, default=1, help='输入源响度包络替换输出响度包络融合比例，越靠近1越使用输出响度包络')
     parser.add_argument('-fr', '--feature_retrieval', action='store_true', default=False, help='是否使用特征检索，如果使用聚类模型将被禁用，且cm与cr参数将会变成特征检索的索引路径与混合比例')
@@ -39,7 +40,7 @@ def main():
     # 浅扩散设置
     parser.add_argument('-dm', '--diffusion_model_path', type=str, default="logs/44k/diffusion/model_0.pt", help='扩散模型路径')
     parser.add_argument('-dc', '--diffusion_config_path', type=str, default="logs/44k/diffusion/config.yaml", help='扩散模型配置文件路径')
-    parser.add_argument('-ks', '--k_step', type=int, default=100, help='扩散步数，越大越接近扩散模型的结果，默认100')
+    parser.add_argument('-ks', '--k_step', type=int, default=50, help='扩散步数，越大越接近扩散模型的结果，默认100')
     parser.add_argument('-se', '--second_encoding', action='store_true', default=False, help='二次编码，浅扩散前会对原始音频进行二次编码，玄学选项，有时候效果好，有时候效果差')
     parser.add_argument('-od', '--only_diffusion', action='store_true', default=False, help='纯扩散模式，该模式不会加载sovits模型，以扩散模型推理')
     

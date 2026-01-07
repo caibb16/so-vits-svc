@@ -1,4 +1,2 @@
-./dataset/44k/nyaru/000003.wav
-./dataset/44k/nyaru/000007.wav
-./dataset/44k/taffy/000558.wav
-./dataset/44k/taffy/000556.wav
+./dataset/44k//Rei_state_slice/1_336746708_nb2-1-30232_(Vocals)_97.wav
+./dataset/44k//Rei_state_slice/28817359461-1-192_203.wav
